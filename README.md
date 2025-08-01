@@ -26,6 +26,13 @@ pip install PyQt5
 ```
 python main.py
 ```
+### Updates
+7/30/2025:
+    - [x] Project Created
+    - [x] add media display
+    - [x] add media list
+7/31/2025:
+    - [x] add combine video in the media list feature
 
 ### Upcoming Features
 - Trim and cut video

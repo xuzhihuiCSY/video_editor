@@ -28,10 +28,13 @@ python main.py
 ```
 ### Updates
 7/30/2025:
+
     - Project Created
     - add media display
     - add media list
+
 7/31/2025:
+
     - add combine video in the media list feature
 
 ### Upcoming Features

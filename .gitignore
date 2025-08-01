@@ -5,3 +5,5 @@ __pycache__/
 *.pyd
 *.env
 .env
+*.mp4
+.test_video/

@@ -6,6 +6,9 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, QUrl, QTimer
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 from PyQt5.QtMultimediaWidgets import QVideoWidget
+from moviepy.editor import VideoFileClip, concatenate_videoclips
+import os
+from PyQt5.QtWidgets import QMessageBox
 
 class ClickableSlider(QSlider):
     def mousePressEvent(self, event):
@@ -72,6 +75,10 @@ class MainWindow(QWidget):
         self.list_widget.setSelectionMode(QAbstractItemView.SingleSelection)
         self.list_widget.setDropIndicatorShown(True)
         self.list_widget.itemClicked.connect(self.play_selected_video)
+        self.generate_button = QPushButton("🎬 Generate Combined Video")
+        self.generate_button.clicked.connect(self.generate_combined_video)
+        right_layout.addWidget(self.generate_button)
+
         right_layout.addWidget(self.list_widget)
 
         # Combine left and right
@@ -148,7 +155,32 @@ class MainWindow(QWidget):
 
             self.list_widget.setCurrentRow(next_row)
             self.play_selected_video(next_item)
+            
+    def generate_combined_video(self):
+        if self.list_widget.count() == 0:
+            QMessageBox.warning(self, "No Videos", "Please add some videos to combine.")
+            return
 
+        try:
+            file_paths = []
+            for i in range(self.list_widget.count()):
+                item = self.list_widget.item(i)
+                file_path = item.data(Qt.UserRole)
+                file_paths.append(file_path)
+
+            clips = [VideoFileClip(path) for path in file_paths]
+
+            final_clip = concatenate_videoclips(clips, method="compose")
+
+            # Save in same root folder as first video
+            output_folder = os.path.dirname(file_paths[0])
+            output_path = os.path.join(output_folder, "combined_output.mp4")
+
+            final_clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
+
+            QMessageBox.information(self, "Success", f"Combined video saved to:\n{output_path}")
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to combine videos:\n{str(e)}")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -1,6 +1,23 @@
 
 # PR-like Video Editor (XuPR)
 
+## what’s done
+- App shell (PySide6): dockable Media Bin + Inspector, central Preview over Timeline.
+
+- Timeline view: tracks drawn, draggable clip blocks, scrubber, zoom in/out, time ticks.
+
+- Media Bin: import files (no auto-play).
+
+- Add to timeline: drop selected media at playhead on V1.
+
+- Playback: Play button plays the timeline (V1 clips in order). Scrubber syncs.
+
+- Project I/O: save/open .xuproj (JSON).
+
+- Export (stub): placeholder FFmpeg command (not a real render).
+
+- Quality of life: keyboard (Space/J/K/L), basic scene sizing, .gitignore, README.
+
 ## Need Action: 
 
 ### Core timeline editing

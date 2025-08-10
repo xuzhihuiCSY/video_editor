@@ -1,7 +1,8 @@
 
-# PR-like Video Editor (XuPR) – v6
+# PR-like Video Editor (XuPR)
 
-## need action: 
+## Need Action: 
+
 ### Core timeline editing
 
 - Trim/extend clip with resize handles (update in_ms/out_ms).
@@ -52,6 +53,7 @@
 
 - File-missing handling, relative paths, autosave, tests.
 
+## Setup
 Install:
 ```bash
 pip install -r requirements.txt
